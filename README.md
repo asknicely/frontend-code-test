@@ -23,3 +23,11 @@ php bin/console make:user
 
 https://api-platform.com/docs/core/jwt/
 
+
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+
+composer require symfonycasts/verify-email-bundle
+php bin/console make:registration-form
+
+php bin/console doctrine:migrations:sync-metadata-storage
