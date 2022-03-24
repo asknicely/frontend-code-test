@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Doctrine\SetUserListener;
 use App\Repository\TodoRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TodoRepository::class)]
+#[ORM\EntityListeners([SetUserListener::class])]
 #[ApiResource(
     denormalizationContext: ['groups' => ['write']],
     normalizationContext: ['groups' => ['read']],
@@ -21,7 +23,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups('read')]
     private $createdBy;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -37,7 +38,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         return $this->id;
     }
 
-    public function getCreatedBy(): User
+    public function getCreatedBy(): ?User
     {
         return $this->createdBy;
     }
