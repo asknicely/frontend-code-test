@@ -5,23 +5,31 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TodoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TodoRepository::class)]
-#[ApiResource]
-class Todo
+#[ApiResource(
+    denormalizationContext: ['groups' => ['write']],
+    normalizationContext: ['groups' => ['read']],
+)]class Todo
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups('read')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
-    private $user_id;
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Groups('read')]
+    private $createdBy;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read','write'])]
     private $description;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read','write'])]
     private $status;
 
     public function getId(): ?int
@@ -29,14 +37,14 @@ class Todo
         return $this->id;
     }
 
-    public function getUserId(): ?int
+    public function getCreatedBy(): User
     {
-        return $this->user_id;
+        return $this->createdBy;
     }
 
-    public function setUserId(int $user_id): self
+    public function setCreatedBy(User $createdBy): self
     {
-        $this->user_id = $user_id;
+        $this->createdBy = $createdBy;
 
         return $this;
     }

@@ -32,9 +32,11 @@ commit messages and PR descriptions as well as testing instructions.
 * Generate a sample token by clicking the try it out section
 of Token resource, provided with the user credentials you just registered.
 <img width="1680" alt="Screen Shot 2022-03-24 at 1 45 31 PM" src="https://user-images.githubusercontent.com/6070516/159821422-5075e623-11d7-41f5-9398-b39ba329b1aa.png">
+
 * Once you get a token, scroll to top of page and click on authorise
 button to authorise the API, content will be `bearer YOUR_TOKEN_STRING`
 <img width="1680" alt="Screen Shot 2022-03-24 at 1 43 38 PM" src="https://user-images.githubusercontent.com/6070516/159821433-2a6bb76a-efe8-4925-a84e-df539aa74a4b.png">
+
 * Then you should be able to try out the rest of APIs on the page.
 
 
