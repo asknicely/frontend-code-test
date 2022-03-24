@@ -57,6 +57,10 @@ button to authorise the API, content will be `bearer YOUR_TOKEN_STRING`
 
 [JWT authentication with Symfony](https://digitalfortress.tech/php/jwt-authentication-with-symfony/)
 
+[Auto set current User](https://symfonycasts.com/screencast/api-platform-security/entity-listener)
+
+[Filter results for current User with Extensions](https://api-platform.com/docs/core/extensions/)
+
 **Update table schema with Doctrine**:
 ```
 php bin/console doctrine:schema:update --dump-sql
