@@ -23,9 +23,16 @@ commit messages and PR descriptions as well as testing instructions.
 
 ## Steps to get REST API ready
 #### Start docker: `docker-compose up`
+#### Install composer libs: `docker-compose exec server composer install`
 #### Setup tables: `docker-compose exec server php bin/console doctrine:schema:update --force`
 #### Register your user: `http://localhost:8101/register`
-#### View REST API docs: `http://localhost:8101/api/docs`
+#### Using the REST API:
+* View REST API docs: `http://localhost:8101/api/docs`
+* Generate a sample token by clicking the try it out section
+of Token resource, provided with the user credentials you just registered.
+* Once you get a token, scroll to top of page and click on authorise
+button to authorise the API, content will be `bearer YOUR_TOKEN_STRING`
+* Then you should be able to try out the rest of APIs on the page.
 
 
 ## Other useful things:
