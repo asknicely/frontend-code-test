@@ -25,6 +25,7 @@ commit messages and PR descriptions as well as testing instructions.
 #### Start docker: `docker-compose up`
 #### Install composer libs: `docker-compose exec server composer install`
 #### Setup tables: `docker-compose exec server php bin/console doctrine:schema:update --force`
+#### Generate JWT key pairs: `docker-compose exec server php bin/console lexik:jwt:generate-keypair`
 #### Register your user: `http://localhost:8101/register`
 #### Using the REST API:
 * View REST API docs: `http://localhost:8101/api/docs`
