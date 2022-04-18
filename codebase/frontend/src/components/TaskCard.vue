@@ -1,33 +1,44 @@
 <template>
   <div class="card">
-    <div>
+    <div :style="descriptionStyle">
       {{ this.description }}
     </div>
     <div>
-      {{ this.status }}
+      <button @click="markDone">Done</button>
+      <button @click="deleteThisTodo">Delete</button>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
 
+import {deleteTodo, doneTodo} from "../api/api";
+
 export default {
   name: 'TaskCard',
-  props: ['description', 'status'],
-  // data () {
-  //   return {
-  //     todo: 'Welcome to Your Vue.js App'
-  //   }
-  // },
-  // mounted () {
-  //   this.todo = getTodos();
-  //   console.log(this.todo)
-  // },
-  // methods: {
-  //   addTodo() {
-  //     uploadTodo("Some description", "Active");
-  //   }
-  // }
+  props: ['description', 'status', 'todoId'],
+  methods: {
+    deleteThisTodo() {
+      deleteTodo(this.todoId).then(() => {
+        this.refresh();
+      });
+    },
+    markDone() {
+      doneTodo(this.todoId).then(() => {
+        this.refresh();
+      })
+    },
+    refresh() {
+      window.location.reload();
+    }
+  },
+  computed: {
+    descriptionStyle() {
+      return {
+        'text-decoration': this.status === 'Done' ? 'line-through' : 'default',
+      }
+    }
+  }
 }
 </script>
 
@@ -42,5 +53,6 @@ export default {
     margin-bottom: 16px;
     height: 50px;
     width: 500px;
+    background-color: #b9b9b9;
   }
 </style>

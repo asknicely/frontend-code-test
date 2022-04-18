@@ -12,7 +12,7 @@ export default {
   mounted () {
     getTodos().then((data) => {
       this.todos = data;
-    });
+    })
   },
   components: {
     TaskCard
@@ -20,7 +20,11 @@ export default {
   methods: {
     addTodo () {
       const description = document.getElementById('description-input').value;
-      uploadTodo(description, "Active");
+      if (description) {
+        uploadTodo(description).then((data) => {
+          this.todos.push(data)
+        });
+      }
     },
     getTodoList () {
       return this.todos;
@@ -31,10 +35,14 @@ export default {
 
 <template>
   <div id="todo-list">
-    <input type="text" id="description-input">
-    <button @click="addTodo">Click me</button>
+    <h1>Todo List</h1>
+    <div class="todo-input">
+      <input type="text" id="description-input" placeholder="Write something...">
+      <button @click="addTodo">Add todo</button>
+    </div>
+
     <div v-for="todo in this.$data['todos']">
-      <TaskCard :description="todo.description" :status="todo.status" />
+      <TaskCard :description="todo.description" :status="todo.status" :todoId="todo.id" />
     </div>
   </div>
 </template>
@@ -42,7 +50,24 @@ export default {
 
 <style>
   div#todo-list {
-    max-width: 500px;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  div.todo-input {
+    display: flex;
+    width: 566px;
+    margin-bottom: 32px;
+    margin-top: 16px;
+  }
+
+  input#description-input {
+    width: 100%;
+    margin-right: 8px;
+  }
+
+  h1 {
+    color: #efffdf;
   }
 </style>
